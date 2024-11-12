@@ -105,3 +105,5 @@ for (
 ```
 
 ![Moodia Moods](react-app/src/images/readme-mood.gif)
+Daily Mood Tracker with Python by NHI VU 
+COMING SOON!   
