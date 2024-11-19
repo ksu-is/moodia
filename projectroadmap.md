@@ -1,8 +1,8 @@
 - [x] Create title for website DONE
 - [x] Create a description for project DONE
 - [x] Update README.md DONE
-- [ ] Upload code
-- [ ] Run rode. Locate any problems 
+- [x] Upload code DONE
+- [x] Run rode. Locate any problems 
 - [ ] Analyze code 
 - [ ] Work out problems and find solutons 
 - [ ] Make notes of changes and update 
