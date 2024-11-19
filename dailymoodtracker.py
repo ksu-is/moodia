@@ -85,3 +85,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+git add <dailymoodtracker.py>
+git commit -m "Made changes to add mood logging functionality"
