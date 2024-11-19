@@ -112,4 +112,7 @@ git add .
 git commit -m "Initial commit: Added Daily Mood Tracker application"
 
 git add <dailymoodtracker.py>
+git commit -m "Description of the update"
+
+git add <dailymoodtracker.py>
 git commit -m "Made changes to add mood logging functionality"
