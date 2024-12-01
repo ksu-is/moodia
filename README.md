@@ -118,10 +118,11 @@ git add <dailymoodtracker.py>
 git commit -m "Made changes to add mood logging functionality"
 
 ## By NHI VU
-import sqlite3
-from datetime import datetime
 
 # Initialize the database
+import sqlite3
+from datetime import datetime 
+
 def initialize_database():
     conn = sqlite3.connect("mood_tracker.db")
     cursor = conn.cursor()
@@ -137,6 +138,7 @@ def initialize_database():
     conn.close()
 
 # Add a new mood entry
+
 def add_mood():
     date = datetime.now().strftime("%Y-%m-%d")
     mood = input("How are you feeling today? (e.g., Happy, Sad, Neutral): ")
