@@ -1,90 +1,94 @@
 import sqlite3
 from datetime import datetime
 
-# Initialize the database
-def initialize_database():
-    conn = sqlite3.connect("mood_tracker.db")
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS moods (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            date TEXT NOT NULL,
-            mood TEXT NOT NULL,
-            note TEXT
-        )
-    """)
-    conn.commit()
-    conn.close()
+# Initialize SQLite database
+conn = sqlite3.connect("mood_tracker.db")
+cursor = conn.cursor()
 
-# Add a new mood entry
-def add_mood():
+# Create tables if not exists
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS mood_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL,
+    mood TEXT NOT NULL,
+    habits TEXT,
+    goals TEXT,
+    diary_entry TEXT
+)
+""")
+conn.commit()
+
+def log_mood():
+    """Log daily mood, habits, goals, and diary entry."""
     date = datetime.now().strftime("%Y-%m-%d")
-    mood = input("How are you feeling today? (e.g., Happy, Sad, Neutral): ")
-    note = input("Add any notes about your day (optional): ")
-
-    conn = sqlite3.connect("mood_tracker.db")
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO moods (date, mood, note) VALUES (?, ?, ?)", (date, mood, note))
+    mood = input("How do you feel today? (e.g., Happy, Sad, Neutral): ")
+    habits = input("What habits did you engage in today? (e.g., Exercise, Reading): ")
+    goals = input("What goals are you focusing on? ")
+    diary_entry = input("Write a diary entry for today: ")
+    
+    cursor.execute("""
+    INSERT INTO mood_logs (date, mood, habits, goals, diary_entry)
+    VALUES (?, ?, ?, ?, ?)
+    """, (date, mood, habits, goals, diary_entry))
     conn.commit()
-    conn.close()
+    print("Mood logged successfully!")
 
-    print("Mood added successfully!")
+def view_logs():
+    """View all mood logs."""
+    cursor.execute("SELECT * FROM mood_logs")
+    logs = cursor.fetchall()
+    
+    if not logs:
+        print("No logs found.")
+        return
+    
+    print("\n--- Mood Logs ---")
+    for log in logs:
+        print(f"ID: {log[0]}, Date: {log[1]}, Mood: {log[2]}, Habits: {log[3]}, Goals: {log[4]}")
+        print(f"Diary Entry: {log[5]}\n")
 
-# View mood history
-def view_moods():
-    conn = sqlite3.connect("mood_tracker.db")
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM moods ORDER BY date DESC")
-    rows = cursor.fetchall()
-    conn.close()
+def analyze_mood():
+    """Analyze mood trends."""
+    cursor.execute("SELECT mood FROM mood_logs")
+    logs = cursor.fetchall()
+    
+    if not logs:
+        print("No logs available for analysis.")
+        return
+    
+    mood_counts = {}
+    for log in logs:
+        mood = log[0]
+        if mood in mood_counts:
+            mood_counts[mood] += 1
+        else:
+            mood_counts[mood] = 1
+    
+    print("\n--- Mood Analysis ---")
+    for mood, count in mood_counts.items():
+        print(f"{mood}: {count} times")
 
-    if rows:
-        print("\nYour Mood History:")
-        for row in rows:
-            print(f"Date: {row[1]}, Mood: {row[2]}, Note: {row[3]}")
-    else:
-        print("No mood entries found.")
-
-# Delete a mood entry
-def delete_mood():
-    view_moods()
-    mood_id = input("Enter the ID of the mood entry you want to delete: ")
-
-    conn = sqlite3.connect("mood_tracker.db")
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM moods WHERE id = ?", (mood_id,))
-    conn.commit()
-    conn.close()
-
-    print("Mood entry deleted successfully!")
-
-# Main menu
-def main():
-    initialize_database()
-
+def main_menu():
+    """Main menu for the application."""
     while True:
-        print("\nDaily Mood Tracker")
-        print("1. Add Mood")
-        print("2. View Moods")
-        print("3. Delete Mood")
+        print("\n--- Daily Mood Tracker ---")
+        print("1. Log today's mood")
+        print("2. View mood logs")
+        print("3. Analyze mood trends")
         print("4. Exit")
+        choice = input("Enter your choice (1-4): ")
 
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
-            add_mood()
-        elif choice == "2":
-            view_moods()
-        elif choice == "3":
-            delete_mood()
-        elif choice == "4":
-            print("Exiting the application. Have a great day!")
+        if choice == '1':
+            log_mood()
+        elif choice == '2':
+            view_logs()
+        elif choice == '3':
+            analyze_mood()
+        elif choice == '4':
+            print("Exiting the application. Stay positive!")
             break
         else:
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    main()
-
-git add <dailymoodtracker.py>
-git commit -m "Made changes to add mood logging functionality"
+    main_menu()
