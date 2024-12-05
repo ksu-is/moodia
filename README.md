@@ -119,3 +119,41 @@ git commit -m "Made changes to add mood logging functionality"
 
 ## By NHI VU
 
+# Daily Mood Tracker Application
+
+## Overview
+
+The **Daily Mood Tracker** is a simple Python-based application that helps users log their moods, habits, and goals, and write daily diary entries. It also provides basic trend analysis of logged moods to help users better understand their mental health over time.
+
+---
+
+## Features
+
+1. **Log Daily Mood**:
+   - Users can record their mood (e.g., Happy, Sad, Neutral), habits, goals, and a diary entry for the day.
+
+2. **View Logs**:
+   - Displays all past entries in a formatted text output.
+
+3. **Analyze Mood Trends**:
+   - Provides an analysis of mood trends by counting the occurrences of each mood.
+
+4. **Persistent Data**:
+   - All data is saved in an SQLite database (`mood_tracker.db`), so it is retained between sessions.
+
+---
+
+## How to Run
+
+### Prerequisites
+
+- Python 3.x installed on your machine.
+- No additional libraries are required (SQLite is included with Python).
+
+### Steps to Run the Application
+
+1. **Clone or Download** the repository:
+   ```bash
+   git clone <repository_url>
+   cd mood-tracker
+
