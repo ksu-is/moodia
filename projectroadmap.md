@@ -2,9 +2,10 @@
 - [x] Create a description for project DONE
 - [x] Update README.md DONE
 - [x] Upload code DONE
-- [x] Run rode. Locate any problems 
-- [ ] Analyze code 
-- [ ] Work out problems and find solutons 
-- [ ] Make notes of changes and update 
-- [ ] Do a final run of Code to ensure it runs smoothly 
-- [ ] Create powerpoint slide 
+- [x] Run rode. Locate any problems DONE
+- [x] Analyze code DONE
+- [x] Work out problems and find solutons DONE
+- [x] Make notes of changes and update DONE
+- [x] Do a final run of Code to ensure it runs smoothly DONE
+- [x] Create powerpoint slide DONE
+- [x] Present a final presentation 
