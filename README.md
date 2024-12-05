@@ -154,6 +154,6 @@ The **Daily Mood Tracker** is a simple Python-based application that helps users
 
 1. **Clone or Download** the repository:
    ```bash
-   git clone <repository_url>
+   git clone <dailymoodtracker.py>
    cd mood-tracker
 
